@@ -19,11 +19,13 @@ def dataRequestCity(city, t):
 
     api_key = 'b8a0167de4e3b9dd8c211ec3dd2f98f6'
     response = requests.get("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&dt=" + t + "&appid=" + api_key)
-    #response = requests.get(
-    #    "https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=" + x + "&lon=" + y + "&dt=" + t + "&appid=" + api_key)
+    x = str(response.json()['coord']['lat'])
+    y = str(response.json()['coord']['lon'])
+    response = requests.get(
+        "https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=" + x + "&lon=" + y + "&dt=" + t + "&appid=" + api_key)
     data = response.json()
     print(data)
-    print("Temp: " + str(round(data['main']['temp']-273.15, 2)) + "C")
+    print("Temp: " + str(round(data['current']['temp']-273.15, 2)) + "C")
 
 
 def main():
